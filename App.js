@@ -1,23 +1,41 @@
 import React from 'react';
-// import { StyleSheet } from 'react-native';
+import { Text, Button } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import ListingEditScreen from './app/screens/ListingEditScreen';
-import RegisterScreen from './app/screens/RegisterScreen';
-import MessagesScreen from './app/screens/MessagesScreen';
+import Screen from './app/components/Screen';
+import AppNavigator from './app/navigation/AppNavigator';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import navigationTheme from './app/navigation/navigationTheme';
+
+const Tweets = ({ navigation }) => (
+  <Screen>
+    <Text>Tweets</Text>
+    <Button
+      title="View Tweet"
+      onPress={() => navigation.navigate("TweetDetails")}
+    />
+  </Screen>
+);
+
+const TweetDetails = () => (
+  <Screen>
+    <Text>Tweet Details</Text>
+  </Screen>
+);
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator initialRouteName="Tweets">
+    <Stack.Screen name="TweetDetails" component={TweetDetails} />
+    <Stack.Screen name="Tweets" component={Tweets} />
+  </Stack.Navigator>
+);
 
 export default function App() {
-
   return (
-    <ListingEditScreen/>
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
   );
 };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// }); <Icon name="email" size={50} backgroundColor="red" iconColor="white" />,
-      // justifyContent: 'center',
-      // alignIterms: 'center'
