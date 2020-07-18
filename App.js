@@ -8,6 +8,10 @@ import navigationTheme from './app/navigation/navigationTheme';
 import OfflineNotice from './app/components/OfflineNotice';
 import AuthContext from './app/auth/context';
 import authStorage from './app/auth/storage';
+import { navigationRef } from './app/navigation/rootNavigation';
+import logger from './app/utility/logger';
+
+// logger.start();
 
 export default function AppOld() {
   const [user, setUser] = useState();
@@ -18,13 +22,19 @@ export default function AppOld() {
     if (user) setUser(user);
   };
 
+  const appReady = () => {
+    // this function replaces: () => setIsReady(true)
+    logger.start();
+    setIsReady(true);
+  };
+
   if (!isReady)
-  return <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} />
+  return <AppLoading startAsync={restoreUser} onFinish={appReady} />
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>

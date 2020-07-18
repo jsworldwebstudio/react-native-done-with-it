@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
-import { Image } from 'react-native-expo-image-cache';
+import { Image, CacheManager } from 'react-native-expo-image-cache';
 
 import colors from '../config/colors';
 import AppText from './AppText';
 
 const Card = ({ title, price, imageUrl, onPress, thumbnailUrl }) => {
+
+  // const clearImageCache = async () => {
+  //   try {
+  //     await CacheManager.clearCache();
+  //   } catch (error) {
+  //     console.log('Image Cache issue: ', error)
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   clearImageCache();
+  // }, []);
+
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.card}>

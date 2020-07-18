@@ -12,6 +12,7 @@ import authApi from '../api/auth';
 import usersApi from '../api/users';
 import useAuth from '../auth/useAuth';
 import useApi from '../hooks/useApi';
+import logger from '../utility/logger';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().min(2).label("Name"),
@@ -33,7 +34,8 @@ const RegisterScreen = (props) => {
        if (result.data) setError(result.data.error);
        else {
          setError("An unexpected error occurred during user registration");
-         console.log(result);
+        //  console.log(result);
+         logger.log('An unexpected error occurred during user registration', result);
        }
        setShowErrorMessage(true);
        return;

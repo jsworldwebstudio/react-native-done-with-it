@@ -1,17 +1,21 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 
 import AppText from '../components/AppText';
 import colors from '../config/colors';
 import ListItem from '../components/ListItem';
+import ContactSellerForm from '../components/ContactSellerForm';
 
 const ListingDetailsScreen = ({ route }) => {
   const listing = route.params;
 
   return (
-    <View>
-      {/*<Image style={styles.image} source={require('../assets/jacket.jpg')} />*/}
+    <KeyboardAvoidingView
+      behavior="position"
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+    >
+      {/* <Image style={styles.image} source={require('../assets/jacket.jpg')} /> */}
       {/* Used RN Image component <Image style={styles.image} source={{ uri: listing.images[0].url }} /> */}
       <Image
         style={styles.image}
@@ -27,10 +31,12 @@ const ListingDetailsScreen = ({ route }) => {
             image={require("../assets/james.jpg")}
             title="James Slaughter"
             listings="5 Listings"
+            showChevrons
           />
         </View>
+        <ContactSellerForm listing={listing} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   userContainer: {
-    marginVertical: 40
+    marginVertical: 20
   },
 });
 

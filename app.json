@@ -22,7 +22,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jsworldwebstudio.donewithit",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.jsworldwebstudio.donewithit",
+      "versionCode": 1
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "1d74fe198091a26090592db27d3862ce"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }
